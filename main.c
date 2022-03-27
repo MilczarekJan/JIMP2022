@@ -14,7 +14,7 @@ int main(int argc, char **argv)
     double  fromrange = 0;
     double  torange = 1;
 
-    char    *progname= argv[0];
+    char    *progname = argv[0];
 
     while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:")) != -1)
     {
@@ -48,12 +48,12 @@ int main(int argc, char **argv)
 
     input_errors_management(opt, mode, fromvert, tovert, filename, fromrange, torange, progname);
 
-    if(mode == "read") // od tad cos sie pierdoli
+    if(mode == "read") // odtad cos sie pierdoli
     {
         FILE *inf = fopen(filename, "r");
         if(inf == NULL)
         {
-            printf("Can not open file %s.", filename);
+            printf("Could not open file %s.\n", filename);
             exit(EXIT_FAILURE);
         }
     }
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        printf("Program mode (read/write) invalid! Ending program...\n");
+        printf("PIERDOLI SIE COS Program mode (read/write) invalid! Ending program...\n");
         exit(EXIT_FAILURE);
     }
 

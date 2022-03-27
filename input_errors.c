@@ -16,7 +16,7 @@ char *help =
 
 void input_errors_management(int opt, char *mode, int fromvert, int tovert, char *filename, double fromrange, double torange, char *progname)
 {
-    printf("mode:%s|\n", mode);
+    printf("mode:|%s|\n", mode);
 
     if(torange > fromrange) //if fromrange and torange confused, swap them
     {
