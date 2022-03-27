@@ -3,6 +3,6 @@
 
 #include <stdio.h>
 
-void input_errors_management(int opt, char *name, char *mod, int fromvert, int tovert, char *filename, double fromrange, double torange);
+void input_errors_management(int opt, char *mode, int fromvert, int tovert, char *filename, double fromrange, double torange, char *progname);
 
 #endif
