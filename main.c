@@ -3,13 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
+#include <string.h>
 
 int main(int argc, char **argv)
 {
     int     opt;
     char    *mode = NULL;
-    int     fromvert = -1;
-    int     tovert = -1;
+    int     fromvert = 1;
+    int     tovert = 10; // do ustawienia -1 obu później
     char    *filename = NULL;
     double  fromrange = 0;
     double  torange = 1;
@@ -21,7 +22,6 @@ int main(int argc, char **argv)
         switch (opt)
         {
             case 'h':
-                //printf(&help, progname);
                 printf("gowno zajebane\n");
                 break;
             case 'm':
@@ -48,23 +48,23 @@ int main(int argc, char **argv)
 
     input_errors_management(opt, mode, fromvert, tovert, filename, fromrange, torange, progname);
 
-    if(mode == "read") // odtad cos sie pierdoli
+    if(strcmp(mode, "read") == 0)
     {
         FILE *inf = fopen(filename, "r");
         if(inf == NULL)
         {
-            printf("Could not open file %s.\n", filename);
+            printf("Could not open file \"%s\".\n", filename);
             exit(EXIT_FAILURE);
         }
     }
-    else if(mode == "write")
+    else if(strcmp(mode, "write") == 0)
     {
-        FILE *inf = fopen(filename, "w");
-    }
-    else
-    {
-        printf("PIERDOLI SIE COS Program mode (read/write) invalid! Ending program...\n");
-        exit(EXIT_FAILURE);
+        FILE *ouf = fopen(filename, "w");
+        if(ouf == NULL)
+        {
+            printf("Could not create file \"%s\".\n", filename);
+            exit(EXIT_FAILURE);
+        }
     }
 
     return 0;

@@ -2,9 +2,10 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 char *help =
-    "Usage: %s -m mode -f number -t number -n/-r filename [-y precise number] [-z precise number] [-h]\n"
+    "Usage: %s -m mode -f number -t number -n/-r filename [-y precise number] [-z precise number] [-h h/help]\n"
     "m - mode (read/write)\n"
     "f - from which vertex the dijkstra algorithm starts (number)\n"
     "t - to which vertex the dijkstra algorithm finds way (number)\n"
@@ -16,7 +17,6 @@ char *help =
 
 void input_errors_management(int opt, char *mode, int fromvert, int tovert, char *filename, double fromrange, double torange, char *progname)
 {
-    printf("mode:|%s|\n", mode);
 
     if(torange > fromrange) //if fromrange and torange confused, swap them
     {
@@ -25,7 +25,7 @@ void input_errors_management(int opt, char *mode, int fromvert, int tovert, char
         fromrange = buf;
     }
 
-    if(filename == NULL && mode != "read" && mode != "write" && fromvert == -1 && tovert == -1)
+    if(filename == NULL && mode == NULL && fromvert == -1 && tovert == -1)
     {
         printf(help, progname);
         exit(EXIT_FAILURE);
@@ -37,9 +37,9 @@ void input_errors_management(int opt, char *mode, int fromvert, int tovert, char
         exit(EXIT_FAILURE);
     }
 
-    if(mode == NULL) // If mod invalid, exit program
+    if(strcmp(mode, "read") != 0 && strcmp(mode, "write") != 0) // If mod invalid, exit program
     {
-        printf("Program mode (read/write) not given! Ending program...\n");
+        printf("Program mode (read/write) invalid! Ending program...\n");
         exit(EXIT_FAILURE);
     }
 
