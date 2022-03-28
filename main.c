@@ -22,7 +22,7 @@ int main(int argc, char **argv)
         switch (opt)
         {
             case 'h':
-                printf("gowno zajebane\n");
+                view_help(progname);
                 break;
             case 'm':
                 mode = optarg;
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
         }
     }
 
-    input_errors_management(opt, mode, fromvert, tovert, filename, fromrange, torange, progname);
+    input_errors_management(mode, fromvert, tovert, filename, fromrange, torange, progname);
 
     if(strcmp(mode, "read") == 0)
     {

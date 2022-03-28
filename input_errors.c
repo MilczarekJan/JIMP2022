@@ -4,19 +4,25 @@
 #include <stdio.h>
 #include <string.h>
 
-char *help =
-    "Usage: %s -m mode -f number -t number -n/-r filename [-y precise number] [-z precise number] [-h h/help]\n"
-    "m - mode (read/write)\n"
-    "f - from which vertex the dijkstra algorithm starts (number)\n"
-    "t - to which vertex the dijkstra algorithm finds way (number)\n"
-    "r - name of the file program is supposed to read from (name)\n"
-    "n - name of the file program is supposed to save (name)\n"
-    "y - bottom limit of generated paths weight (default: 0) (number)\n"
-    "z - top limit of generated paths weight (default: 1) (number)\n"
-    "h - display help request (this message)\n";
+char    *help = "Usage: %s -m mode -f number -t number -n/-r filename [-y precise number] [-z precise number] [-h/help]\n"
+                "m - mode (read/write)\n"
+                "f - from which vertex the dijkstra algorithm starts (number)\n"
+                "t - to which vertex the dijkstra algorithm finds way (number)\n"
+                "r - name of the file program is supposed to read from (name)\n"
+                "n - name of the file program is supposed to save (name)\n"
+                "y - bottom limit of generated paths weight (default: 0) (precise number)\n"
+                "z - top limit of generated paths weight (default: 1) (precise number)\n"
+                "h/help - display help request (this message)\n";
 
-void input_errors_management(int opt, char *mode, int fromvert, int tovert, char *filename, double fromrange, double torange, char *progname)
+void view_help(char *progname)
 {
+    printf(help, progname);
+    exit(EXIT_FAILURE);
+}
+
+void input_errors_management(char *mode, int fromvert, int tovert, char *filename, double fromrange, double torange, char *progname)
+{
+    
 
     if(torange > fromrange) //if fromrange and torange confused, swap them
     {
@@ -25,10 +31,10 @@ void input_errors_management(int opt, char *mode, int fromvert, int tovert, char
         fromrange = buf;
     }
 
-    if(filename == NULL && mode == NULL && fromvert == -1 && tovert == -1)
+    if(filename == NULL && mode == NULL /*&& fromvert == -1 && tovert == -1*/)
     {
-        printf(help, progname);
-        exit(EXIT_FAILURE);
+        printf("Too few launch arguments! Launch instructions:\n");
+        view_help(progname);
     }
 
     if(filename == NULL) // If file not given, exit program
@@ -37,7 +43,7 @@ void input_errors_management(int opt, char *mode, int fromvert, int tovert, char
         exit(EXIT_FAILURE);
     }
 
-    if(strcmp(mode, "read") != 0 && strcmp(mode, "write") != 0) // If mod invalid, exit program
+    if(strcmp(mode, "read") != 0 && strcmp(mode, "write") != 0) // If mode invalid, exit program
     {
         printf("Program mode (read/write) invalid! Ending program...\n");
         exit(EXIT_FAILURE);
