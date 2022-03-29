@@ -1,4 +1,4 @@
-#include "input_errors.h"
+#include "input_mgmt.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,14 +10,16 @@ int main(int argc, char **argv)
     int     opt;
     char    *mode = NULL;
     int     fromvert = 1;
-    int     tovert = 10; // do ustawienia -1 obu później
+    int     tovert = 10; // do ustawienia -1 wiele rzeczy później
     char    *filename = NULL;
     double  fromrange = 0;
     double  torange = 1;
+    int     rows = 4;
+    int     columns = 4;
 
     char    *progname = argv[0];
 
-    while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:")) != -1)
+    while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:c:")) != -1)
     {
         switch (opt)
         {
@@ -34,7 +36,6 @@ int main(int argc, char **argv)
                 tovert = atoi(optarg);
                 break;
             case 'n':
-            case 'r':
                 filename = optarg;
                 break;
             case 'y':
@@ -43,10 +44,16 @@ int main(int argc, char **argv)
             case 'z':
                 torange = atof(optarg);
                 break;
+            case 'c':
+                columns = atof(optarg);
+                break;
+            case 'r':
+                rows = atof(optarg);
+                break;
         }
     }
 
-    input_errors_management(mode, fromvert, tovert, filename, fromrange, torange, progname);
+    input_errors_management(mode, fromvert, tovert, filename, fromrange, torange, progname, rows, columns);
 
     if(strcmp(mode, "read") == 0)
     {

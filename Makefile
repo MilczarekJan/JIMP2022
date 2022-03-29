@@ -1,5 +1,5 @@
-output: main.o input_errors.o
-	gcc main.o input_errors.o -o output
+output: main.o input_mgmt.o
+	gcc main.o input_mgmt.o -o output
 
 .PHONY: clean
 
