@@ -9,143 +9,142 @@ double randomdouble(double min, double max)
     double div = RAND_MAX / range;
     return min + (rand() / div);
 }
-void creategraph(FILE* new_file, int ilosckolumn, int iloscwierszy, double dolnagranica, double gornagranica)
-//void creategraph(char* nazwa, int iloscwierszy, int ilosckolumn, double dolnagranica, double gornagranica)
-{
-  char tresc[50];
-  int wezeltymczasowy;
-  double krawedztymczasowa;
-  sprintf(tresc, "%d ", ilosckolumn);
-  fputs(tresc, new_file);
-  sprintf(tresc, "%d\n\t", iloscwierszy);
-  fputs(tresc, new_file);
-  for (int i = 0; i < iloscwierszy*ilosckolumn; i++)
-  {
-    if (i==0) //lewy górny narożnik
-    {
 
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if (i==ilosckolumn-1) //prawy górny narożnik
+void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange)
+{
+    char tresc[50];
+    int temp_node;
+    double temp_edge;
+    sprintf(tresc, "%d ", columns);
+    fputs(tresc, filename);
+    sprintf(tresc, "%d\n\t", rows);
+    fputs(tresc, filename);
+    for (int i = 0; i < rows * columns; i++)
     {
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
+        if (i == 0) // lewy górny narożnik
+        {
+
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i == columns - 1) // prawy górny narożnik
+        {
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i == columns * rows - 1) // prawy dolny narożnik
+        {
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i == (rows - 1) * columns) // lewy dolny narożnik
+        {
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i > 0 && i < columns - 1) // górny środek grafu
+        {
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i > (rows - 1) * columns && i < columns * rows - 1) // dolny środek grafu
+        {
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if (i % columns == 0 && i != 0) // lewy środek grafu
+        {
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else if ((i + 1) % columns == 0) // prawy środek grafu
+        {
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
+        else // węzły w środku grafu
+        {
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f \n\t", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+        }
     }
-    else if (i==ilosckolumn*iloscwierszy-1) //prawy dolny narożnik
-    {
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if (i==(iloscwierszy-1)*ilosckolumn) //lewy dolny narożnik
-    {
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if(i>0 && i<ilosckolumn-1)//górny środek grafu
-    {
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if(i>(iloscwierszy-1)*ilosckolumn && i<ilosckolumn*iloscwierszy-1) //dolny środek grafu
-    {
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if(i%ilosckolumn == 0 && i!=0) //lewy środek grafu
-    {
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else if((i+1)%ilosckolumn == 0) //prawy środek grafu
-    {
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    else //węzły w środku grafu
-    {
-      sprintf(tresc, " %d :", i-ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+ilosckolumn);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i-1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f ", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-      sprintf(tresc, " %d :", i+1);
-      fputs(tresc, new_file);
-      sprintf(tresc, "%f \n\t", randomdouble(dolnagranica,gornagranica));
-      fputs(tresc, new_file);
-    }
-    }
-    //if ((i==0 && (j==0 || j==iloscwierszy-1))||(i==ilosckolumn-1 && (j==0 || j==iloscwierszy-1)))
-    fclose(new_file);
-  }
+    fclose(filename);
+}

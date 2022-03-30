@@ -3,24 +3,26 @@
 
 #include <stdlib.h>
 
-typedef struct para {
-	int wezel;
-	double droga;
-} para;
+typedef struct pair
+{
+	int node;
+	double path;
+} pair;
 
-typedef struct listapar {
-	para pary;
-  struct listapar* next;
-} listapar;
+typedef struct pair_list
+{
+	pair pairs;
+	struct pair_list *next;
+} pair_list;
 
-typedef struct graf {
-  listapar lista;
-	int kolumny;
-	int wiersze;
-} graf;
+typedef struct graph
+{
+	pair_list list;
+	int columns;
+	int rows;
+} graph;
 
 double randomdouble(double min, double max);
-void creategraph(FILE* new_file, int ilosckolumn, int iloscwierszy, double dolnagranica, double gornagranica);
-
+void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange);
 
 #endif
