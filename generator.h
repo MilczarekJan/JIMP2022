@@ -23,6 +23,7 @@ typedef struct graph
 } graph;
 
 double randomdouble(double min, double max);
-void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange);
+
+void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange, int cohesive);
 
 #endif

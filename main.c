@@ -13,6 +13,7 @@ int main(int argc, char **argv)
     int     fromvert = 1;
     int     tovert = 10; // do ustawienia -1 wiele rzeczy później
     char    *filename = NULL;
+    int     cohesive = 1;
     double  fromrange = 0;
     double  torange = 1;
     int     rows = 4;
@@ -20,7 +21,7 @@ int main(int argc, char **argv)
 
     char    *progname = argv[0];
 
-    while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:c:")) != -1)
+    while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:c:i:")) != -1)
     {
         switch (opt)
         {
@@ -51,6 +52,10 @@ int main(int argc, char **argv)
             case 'r':
                 rows = atof(optarg);
                 break;
+            case 'i':
+                if(optarg[0] == 'f' || strcmp(optarg, "false") == 0)
+                    cohesive = 0;
+                break;
         }
     }
 
@@ -73,7 +78,8 @@ int main(int argc, char **argv)
             printf("Could not create file \"%s\".\n", filename);
             exit(EXIT_FAILURE);
         }
-        creategraph(ouf, columns, rows, fromrange, torange);
+
+        creategraph(ouf, columns, rows, fromrange, torange, cohesive);
     }
     return 0;
 }

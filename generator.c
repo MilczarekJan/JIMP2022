@@ -1,7 +1,8 @@
+#include "generator.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "generator.h"
 
 double randomdouble(double min, double max)
 {
@@ -10,7 +11,7 @@ double randomdouble(double min, double max)
     return min + (rand() / div);
 }
 
-void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange)
+void creategraph(FILE *filename, int columns, int rows, double fromrange, double torange, int cohesive)
 {
     char tresc[50];
     int temp_node;
