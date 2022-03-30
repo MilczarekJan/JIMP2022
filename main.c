@@ -1,4 +1,5 @@
 #include "input_mgmt.h"
+#include "generator.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -72,7 +73,7 @@ int main(int argc, char **argv)
             printf("Could not create file \"%s\".\n", filename);
             exit(EXIT_FAILURE);
         }
+        creategraph(ouf, columns, rows, fromrange, torange);
     }
-
     return 0;
 }
