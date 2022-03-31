@@ -1,5 +1,6 @@
 #include "input_mgmt.h"
 #include "generator.h"
+#include "opener.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -69,6 +70,10 @@ int main(int argc, char **argv)
             printf("Could not open file \"%s\".\n", filename);
             exit(EXIT_FAILURE);
         }
+
+        file_open(inf);
+
+        fclose(inf);
     }
     else if(strcmp(mode, "write") == 0)
     {
@@ -80,6 +85,9 @@ int main(int argc, char **argv)
         }
 
         creategraph(ouf, columns, rows, fromrange, torange, cohesive);
+
+        fclose(ouf);
     }
+
     return 0;
 }

@@ -1,6 +1,7 @@
 #ifndef _GENERATOR_H
 #define _GENERATOR_H
 
+#include <stdio.h>
 #include <stdlib.h>
 
 typedef struct pair
