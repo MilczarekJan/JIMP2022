@@ -72,7 +72,6 @@ int main(int argc, char **argv)
         }
 
         file_open(inf);
-
         fclose(inf);
     }
     else if(strcmp(mode, "write") == 0)
@@ -85,7 +84,7 @@ int main(int argc, char **argv)
         }
 
         creategraph(ouf, columns, rows, fromrange, torange, cohesive);
-
+        fclose(ouf);
     }
 
     return 0;

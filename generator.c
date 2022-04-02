@@ -70,6 +70,7 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
         sprintf(tresc, "%f ", randomdouble(fromrange, torange));
         fputs(tresc, filename);
         */
+        fputs("\n\t", filename);
       }
     }
     else
@@ -107,6 +108,7 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
           sprintf(tresc, "%f ", randomdouble(fromrange, torange));
           fputs(tresc, filename);
         }
+        fputs("\n\t", filename);
     }
   }
     /*
@@ -241,5 +243,4 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
       }
     }
 */
-    fclose(filename);
 }
