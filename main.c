@@ -86,7 +86,6 @@ int main(int argc, char **argv)
 
         creategraph(ouf, columns, rows, fromrange, torange, cohesive);
 
-        fclose(ouf);
     }
 
     return 0;
