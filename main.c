@@ -22,6 +22,8 @@ int main(int argc, char **argv)
 
     char    *progname = argv[0];
 
+    graph   *examinedgraph;
+
     while((opt = getopt(argc, argv, "h:m:f:t:s:n:r:y:z:c:i:")) != -1)
     {
         switch (opt)
@@ -71,7 +73,10 @@ int main(int argc, char **argv)
             exit(EXIT_FAILURE);
         }
 
-        file_open(inf);
+        examinedgraph = file_open(inf);
+        printf("dupa2\n");
+        showgraph(examinedgraph);
+        deallocate_graph(examinedgraph);
         fclose(inf);
     }
     else if(strcmp(mode, "write") == 0)
