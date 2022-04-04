@@ -7,6 +7,17 @@
 #include <getopt.h>
 #include <string.h>
 
+void print_edges(pair *node)
+{
+    pair *curr = node;
+    while(curr)
+    {
+        printf("%d %lf ", curr->vertex, curr->weight);
+        curr = curr->next;
+    }
+    printf("\n");
+}
+
 int main(int argc, char **argv)
 {
     int     opt;
@@ -66,19 +77,14 @@ int main(int argc, char **argv)
 
     if(strcmp(mode, "read") == 0)
     {
-        FILE *inf = fopen(filename, "r");
-        if(inf == NULL)
+        graph* graf = file_open(filename);
+
+        for (int i = 0; i <  graf->rows * graf->columns; i++)
         {
-            printf("Could not open file \"%s\".\n", filename);
-            exit(EXIT_FAILURE);
+            printf("%d: ", i);
+            print_edges(graf->edges[i]);
         }
-
-        graph* graf = file_open(inf);
-
-        
-        printf("%d\n", graf->edges[2]->vertex);
-        
-        fclose(inf);
+        //printf("%d\n", graf->edges[2]->vertex);
     }
     else if(strcmp(mode, "write") == 0)
     {

@@ -21,6 +21,6 @@ typedef struct graph
 
 void insert_edge(pair **head, int vertex, double weight);
 
-graph *file_open(FILE *inf);
+graph *file_open(char *filename);
 
 #endif
