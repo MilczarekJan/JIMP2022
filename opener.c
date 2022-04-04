@@ -13,10 +13,18 @@ void insert_edge(pair **head, int vertex, double weight)
     *head = edge;
 }
 
-graph *file_open(FILE *inf)
+graph *file_open(char *filename)
 {
+    FILE *inf = fopen(filename, "r");
+    if(inf == NULL)
+    {
+        printf("Could not open file \"%s\".\n", filename);
+        exit(EXIT_FAILURE);
+    }
+
     int columns;
     int rows;
+
     fscanf(inf, "%d %d", &columns, &rows);
 
     pair** edges;
@@ -33,12 +41,9 @@ graph *file_open(FILE *inf)
     {
         c = fgetc(inf);
         d = fgetc(inf);
-        //printf("%d_ %d %lf\n", line_no, vertex, weight);
         insert_edge(&edges[line_no], vertex, weight);
         if(d == 10)
-        {
             line_no++;
-        }
         fputc(c, inf);
         fputc(d, inf);
     }
@@ -48,7 +53,9 @@ graph *file_open(FILE *inf)
     graf->rows = rows;
     graf->columns = columns;
 
-    printf("%d\n", graf->edges[2]->vertex);
+    //printf("%d\n", graf->edges[2]->vertex);
+
+    fclose(inf);
 
     return graf;
 }
