@@ -1,6 +1,7 @@
 #include "input_mgmt.h"
 #include "generator.h"
 #include "opener.h"
+#include "dijkstra.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,8 +23,8 @@ int main(int argc, char **argv)
 {
     int     opt;
     char    *mode = NULL;
-    int     fromvert = 1;
-    int     tovert = 10; // do ustawienia -1 wiele rzeczy później
+    int     fromvert = 0;
+    int     tovert = 2; // do ustawienia -1 wiele rzeczy później
     char    *filename = NULL;
     int     cohesive = 1;
     double  fromrange = 0;
@@ -79,11 +80,13 @@ int main(int argc, char **argv)
     {
         graph* graf = file_open(filename);
 
-        for (int i = 0; i <  graf->rows * graf->columns; i++)
+        /*for (int i = 0; i <  graf->rows * graf->columns; i++)
         {
             printf("%d: ", i);
             print_edges(graf->edges[i]);
-        }
+        }*/
+
+        dijkstra(graf, fromvert, tovert);
         //printf("%d\n", graf->edges[2]->vertex);
     }
     else if(strcmp(mode, "write") == 0)
@@ -96,7 +99,6 @@ int main(int argc, char **argv)
         }
 
         creategraph(ouf, columns, rows, fromrange, torange, cohesive);
-        fclose(ouf);
     }
 
     return 0;
