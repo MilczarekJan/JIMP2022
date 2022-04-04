@@ -60,11 +60,11 @@ void dijkstra(graph *graf, int fromvert, int tovert)
         {
             if (sprawdzone[i] == 0)
             {
-                printf("A\n");
                 wsz_przeszukane = 0;
             }
         }
         min_odl = 10000;
         printf("\n");
     }
+    printf("Trasa z %d do %d wynosi %lf.\n", fromvert, tovert, odleglosci[tovert]);
 }
