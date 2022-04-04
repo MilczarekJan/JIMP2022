@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
 typedef struct pair_list
 {
 	int startnode;
@@ -17,7 +18,7 @@ typedef struct graph
 	pair_list *list;
 	int columns;
 	int rows;
-} graph;
+} graph;*/
 
 double randomdouble(double min, double max);
 

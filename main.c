@@ -73,10 +73,11 @@ int main(int argc, char **argv)
             exit(EXIT_FAILURE);
         }
 
-        examinedgraph = file_open(inf);
-        printf("dupa2\n");
-        showgraph(examinedgraph);
-        deallocate_graph(examinedgraph);
+        graph* graf = file_open(inf);
+
+        
+        printf("%d\n", graf->edges[2]->vertex);
+        
         fclose(inf);
     }
     else if(strcmp(mode, "write") == 0)

@@ -1,15 +1,26 @@
 #ifndef OPENER_H
 #define OPENER_H
 
-#include "generator.h"
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
 
-graph* file_open(FILE *inf);
-void deallocate_graph(graph* redundantgraph);
-void showgraph(graph* testedgraph);
+typedef struct pair
+{
+    int vertex;
+    double weight;
+    struct pair *next;
+} pair;
+
+typedef struct graph
+{
+    int rows;
+    int columns;
+    pair **edges;
+} graph;
+
+
+void insert_edge(pair **head, int vertex, double weight);
+
+graph *file_open(FILE *inf);
 
 #endif
