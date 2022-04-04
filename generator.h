@@ -4,21 +4,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct pair
-{
-	int node;
-	double path;
-} pair;
-
 typedef struct pair_list
 {
-	pair pairs;
+	int startnode;
+	int endnode;
+	double path;
 	struct pair_list *next;
 } pair_list;
 
 typedef struct graph
 {
-	pair_list list;
+	pair_list *list;
 	int columns;
 	int rows;
 } graph;

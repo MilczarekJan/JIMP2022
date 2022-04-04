@@ -8,6 +8,8 @@
 #include <ctype.h>
 #include <string.h>
 
-void file_open(FILE *inf);
+graph* file_open(FILE *inf);
+void deallocate_graph(graph* redundantgraph);
+void showgraph(graph* testedgraph);
 
 #endif
