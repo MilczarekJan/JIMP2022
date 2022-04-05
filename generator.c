@@ -63,36 +63,51 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
     {
       for (int i = 0; i < rows * columns; i++)
       {
+
         if ((i + 1) % columns != 0)
         {
-          sprintf(tresc, " %d :", i + 1);
-          fputs(tresc, filename);
-          sprintf(tresc, "%f ", randomdouble(fromrange, torange));
-          fputs(tresc, filename);
+          if (i + 1 == rows * columns - 1)
+          {
+            //Nie tworzyć ścieżki do ostatniego punktu
+          }
+          else
+          {
+            sprintf(tresc, " %d :", i + 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+          }
         }
         if(i % columns != 0)
         {
-          sprintf(tresc, " %d :", i - 1);
-          fputs(tresc, filename);
-          sprintf(tresc, "%f ", randomdouble(fromrange, torange));
-          fputs(tresc, filename);
+            sprintf(tresc, " %d :", i - 1);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            //Tutaj warunek nie jest tworzony ponieważ sytuacja w której  i - 1 == rows * columns -1 jest niemożliwa
         }
         if(i >= columns)
         {
-          /*
-          sprintf(tresc, " %d :", i - columns);
-          fputs(tresc, filename);
-          sprintf(tresc, "%f ", randomdouble(fromrange, torange));
-          fputs(tresc, filename);
-          */
-          //Powstaje de facto kilka niepołączonych ze sobą grafów ("wierszy")
+
+            sprintf(tresc, " %d :", i - columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+            //Tutaj warunek nie jest tworzony ponieważ sytuacja w której  i - columns == rows * columns -1 jest niemożliwa
         }
         if(i <= (rows - 1) * columns)
         {
-          sprintf(tresc, " %d :", i + columns);
-          fputs(tresc, filename);
-          sprintf(tresc, "%f ", randomdouble(fromrange, torange));
-          fputs(tresc, filename);
+          if (i + columns == rows * columns - 1)
+          {
+            //Nie tworzyć ścieżki do ostatniego punktu
+          }
+          else
+          {
+            sprintf(tresc, " %d :", i + columns);
+            fputs(tresc, filename);
+            sprintf(tresc, "%f ", randomdouble(fromrange, torange));
+            fputs(tresc, filename);
+          }
         }
         if (i != rows * columns - 1)
         {
