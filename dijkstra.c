@@ -31,12 +31,12 @@ void dijkstra(graph *graf, int fromvert, int tovert)
     double min_odl = 100000;
 
     iteracja(graf->edges[fromvert], sprawdzone, odleglosci, fromvert); //pierwsza iteracja
-    for (int i = 0; i < graf->rows * graf->columns; i++)
+    /*for (int i = 0; i < graf->rows * graf->columns; i++)
     {
         printf("%d: %d, %lf\n", i, sprawdzone[i], odleglosci[i]);
-    }
+    }*/
 
-    while(wsz_przeszukane != 1)
+    for (int k = 0; k < 15; k++)
     {
         int ind = 0;
         for (int i = 0; i < graf->rows * graf->columns; i++)
@@ -48,13 +48,15 @@ void dijkstra(graph *graf, int fromvert, int tovert)
             }
         }
         iteracja(graf->edges[ind], sprawdzone, odleglosci, ind);
-        printf("\npunkt: %d, odleglosc: %lf\n", ind, min_odl);
+        //printf("\npunkt: %d, odleglosc: %lf\n", ind, min_odl);
+        
+        
         // zamykanie petli
 
-        for (int i = 0; i < graf->rows * graf->columns; i++)
+        /*for (int i = 0; i < graf->rows * graf->columns; i++)
         {
             printf("%d: %d, %lf\n", i, sprawdzone[i], odleglosci[i]);
-        }
+        }*/
         wsz_przeszukane = 1;
         for (int i = 0; i < graf->rows * graf->columns; i++)
         {
@@ -66,5 +68,8 @@ void dijkstra(graph *graf, int fromvert, int tovert)
         min_odl = 10000;
         printf("\n");
     }
-    printf("Trasa z %d do %d wynosi %lf.\n", fromvert, tovert, odleglosci[tovert]);
+    if(odleglosci[tovert] == INT_MAX - 1)
+        printf("Nie istnieje trasa miedzy wierzcholkami %d i %d.\n", fromvert, tovert);
+    else
+        printf("Trasa z %d do %d wynosi %lf\n", fromvert, tovert, odleglosci[tovert]);
 }

@@ -82,7 +82,7 @@ int main(int argc, char **argv)
         graph* graf = file_open(filename);
 
         dijkstra(graf, fromvert, tovert);
-        //bfs(graf);
+        bfs(graf);
     }
     else if(strcmp(mode, "write") == 0)
     {

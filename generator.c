@@ -20,6 +20,7 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
     fputs(tresc, filename);
     sprintf(tresc, "%d\n\t", rows);
     fputs(tresc, filename);
+    printf("\nGraph file created succesefully. You will find it in the containing folder.\n");
     if (cohesive == 1)
     {
       for (int i = 0; i < rows * columns; i++)
@@ -98,6 +99,6 @@ void creategraph(FILE *filename, int columns, int rows, double fromrange, double
           fputs("\n\t", filename);
         }
         else fputs("\n", filename);
+      }
     }
-  }
 }
