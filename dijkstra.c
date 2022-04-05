@@ -66,9 +66,11 @@ void dijkstra(graph *graf, int fromvert, int tovert)
             }
         }
         min_odl = 10000;
-        printf("\n");
+        //printf("\n");
     }
-    if(odleglosci[tovert] == INT_MAX - 1)
+    if(tovert >= graf->rows * graf->columns || fromvert >= graf->rows * graf->columns)
+        printf("nieprawidlowe wierzcholki Dijkstry\n");
+    else if(odleglosci[tovert] == INT_MAX - 1)
         printf("Nie istnieje trasa miedzy wierzcholkami %d i %d.\n", fromvert, tovert);
     else
         printf("Trasa z %d do %d wynosi %lf\n", fromvert, tovert, odleglosci[tovert]);
