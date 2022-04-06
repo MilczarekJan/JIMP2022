@@ -20,7 +20,6 @@ typedef struct graph
     pair **edges;
 } graph;
 
-
 void insert_edge(pair **head, int vertex, double weight);
 
 graph *file_open(char *filename);

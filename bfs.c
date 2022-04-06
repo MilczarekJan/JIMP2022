@@ -27,8 +27,6 @@ void sasiedzi(pair *node, int *odwiedzone, int *kolejka, int *wskazniki)
 
 void bfs(graph *graf)
 {
-
-
     int odwiedzone[graf->rows * graf->columns];
     int kolejka[graf->rows * graf->columns];
     int wskazniki[4] = {-1, -1, -1, -1};

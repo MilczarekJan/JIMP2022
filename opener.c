@@ -4,12 +4,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+
 void insert_edge(pair **head, int vertex, double weight)
 {
     pair *edge = malloc(sizeof(pair));
-    edge->vertex = vertex;
-    edge->weight = weight;
-    edge->next = (*head);
+    pair temppair;
+    temppair.vertex = vertex;
+    temppair.weight = weight;
+    temppair.next = (*head);
+    *edge = temppair;
     *head = edge;
 }
 
@@ -49,9 +52,11 @@ graph *file_open(char *filename)
     }
 
     graph *graf = malloc(sizeof(graph));
-    graf->edges = edges;
-    graf->rows = rows;
-    graf->columns = columns;
+    graph tempgraf;
+    tempgraf.edges = edges;
+    tempgraf.rows = rows;
+    tempgraf.columns = columns;
+    *graf = tempgraf;
 
     //printf("%d\n", graf->edges[2]->vertex);
 
@@ -59,3 +64,4 @@ graph *file_open(char *filename)
 
     return graf;
 }
+
